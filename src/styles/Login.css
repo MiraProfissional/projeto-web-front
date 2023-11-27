@@ -1,0 +1,46 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+form {
+    background-color: white;
+    border: 2px solid #000;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px black;
+    font-size: 1.2em;
+    padding: 30px 0px;
+}
+
+button {
+    background-color: rgb(61, 58, 235);
+    border: 2px solid black;
+}
+
+button:hover {
+    background-color: rgb(0, 255, 55);
+}
+
+.realizar-cadastro {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.link-cadastro {
+    font-size: 1.4em;
+    text-decoration: none;
+    color: rgb(61, 58, 235);
+}
+
+.link-cadastro:hover {
+    color: rgb(0, 255, 55);
+}

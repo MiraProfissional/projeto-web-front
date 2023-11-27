@@ -1,0 +1,11 @@
+h2, p, li{
+    text-align: center;
+}
+
+li{
+    display: block;
+}
+
+ul {
+    padding: 0;
+}
