@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Republica from "./Republica";
+import Navbar from "../navbar/Navbar";
 import axios from 'axios';
 import '../styles/ListaRepublicas.css';
 import { useForm } from "react-hook-form";
@@ -28,7 +29,12 @@ export default function ListaRepublicas(){
             'Authorization' : 'Bearer '.concat(sessionStorage.getItem('token'))
         }
     }
+
     
+    const user = async () => await axios.get('http://localhost:3000/mi',config)
+    console.log('Aqui em baixo')
+    console.log(user)
+
     useEffect(() => {
 
         async function valida(){
@@ -50,11 +56,7 @@ export default function ListaRepublicas(){
     return(
         <>  
             <section id='pag-republicas'>
-                <header className="navbar">
-                    <p>Bem vindo usuário [Nome do usuário]</p>
-                    <button className="btn-inscricoes">Minhas inscrições</button>
-                    <button className="btn-configuracoes">Configurações</button>
-                </header>
+                <Navbar/>
                 <section className="filtros-home">
                     <form className="form-pesquisa" onSubmit={handleSubmit(submit)} noValidate>
 

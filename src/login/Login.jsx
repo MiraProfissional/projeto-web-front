@@ -32,7 +32,7 @@ export default function Login(){
             //Extrair o token
             const token = response.data.token;
             sessionStorage.setItem('token', token);
-            if(token)
+            if(token) 
                 setMsg('Autenticado');
         } catch (error) {
             setMsg(error.response.data);
