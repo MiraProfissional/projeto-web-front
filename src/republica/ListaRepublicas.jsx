@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Republica from "./Republica";
 import axios from 'axios';
-import '../styles/ListaDisciplinas.css';
+import '../styles/ListaRepublicas.css';
 import { useForm } from "react-hook-form";
 
 export default function ListaRepublicas(){
@@ -10,6 +10,7 @@ export default function ListaRepublicas(){
     const [formData, setFormData] = useState({
         nome : ' '
     })
+    const [selecao, setSelecao] = useState('');
 
     const form = useForm();
     const { register, handleSubmit } = form;
@@ -17,6 +18,10 @@ export default function ListaRepublicas(){
     const submit = (data) => {
         setFormData({...formData, ...data});
     }
+
+    const handleChange = (event) => {
+        setSelecao(event.target.value);
+      };
 
     const config = {
         headers:{
@@ -44,15 +49,33 @@ export default function ListaRepublicas(){
     }
     return(
         <>  
-            <h2>Busque a disciplina pela sigla ou deixe vazio para retornar todas.</h2>
-            <form onSubmit={handleSubmit(submit)} noValidate>
+            <section id='pag-republicas'>
+                <header className="navbar">
+                    <p>Bem vindo usuário [Nome do usuário]</p>
+                    <button>Minhas inscrições</button>
+                </header>
+                <section className="filtros-home">
+                    <form className="form-pesquisa" onSubmit={handleSubmit(submit)} noValidate>
 
-                <label htmlFor="sigla" placeholder="sigla">Sigla</label>
-                <input type="text" id="sigla" {...register('sigla')} />
-             
-            <button>Listar</button>
-            </form>
-            <BuscaRepublica formData={formData} config={config}/>
+                        <label htmlFor="nomeRepublica" placeholder="nomeRepublica">Insira o nome da república que deseja buscar</label>
+                        <input type="text" id="nomeRepublica" {...register('nomeRepublica')} />
+
+                        <label htmlFor="selecao">Escolha o gênero:</label>
+                        <select id="selecao" value={selecao} onChange={handleChange}>
+                            <option value="">Selecione uma opção</option>
+                            <option value="masculino">Masculina</option>
+                            <option value="feminina">Feminina</option>
+                            <option value="mista">Mista</option>
+                        </select>
+                        
+                    
+                    <button>Listar</button>
+                    </form>
+                </section>
+                <section className="lista-republicas">
+                    <BuscaRepublica formData={formData} config={config}/>
+                </section>
+            </section>
         </>   
     )
 }

@@ -46,8 +46,10 @@ export default function Login(){
 
     return (
         <>  
+        <section id='pag-login'>
             <h2>Bem vindo ao [Nome da plataforma]!!</h2>
-            <form onSubmit={handleSubmit(submit)} noValidate>
+            
+            <form className='form-login' onSubmit={handleSubmit(submit)} noValidate>
 
                 <label htmlFor="email" placeholder="email">Email</label>
                 <input type="text" id="email" {...register('email')} />
@@ -64,6 +66,7 @@ export default function Login(){
                 <p>Não possui conta? Faça seu cadastro!</p>
                 <p><Link className="link-cadastro" to="/criar-user">Cadastrar</Link></p>
             </div>
+        </section>
         </>
     )
 }
