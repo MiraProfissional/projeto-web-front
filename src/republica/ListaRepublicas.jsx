@@ -52,7 +52,8 @@ export default function ListaRepublicas(){
             <section id='pag-republicas'>
                 <header className="navbar">
                     <p>Bem vindo usuário [Nome do usuário]</p>
-                    <button>Minhas inscrições</button>
+                    <button className="btn-inscricoes">Minhas inscrições</button>
+                    <button className="btn-configuracoes">Configurações</button>
                 </header>
                 <section className="filtros-home">
                     <form className="form-pesquisa" onSubmit={handleSubmit(submit)} noValidate>
@@ -69,7 +70,7 @@ export default function ListaRepublicas(){
                         </select>
                         
                     
-                    <button>Listar</button>
+                    <button>Buscar</button>
                     </form>
                 </section>
                 <section className="lista-republicas">

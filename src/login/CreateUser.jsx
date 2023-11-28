@@ -31,7 +31,7 @@ export default function CreateUser(){
     const submit = async (data) => {
         
         try {
-            const response = await axios.post('http://localhost:3000/create', data);
+            const response = await axios.post('http://localhost:3000/create-user', data);
             setMsg(response.data);
             if(response.data.includes('sucesso'))
                 setUserCriado(true);

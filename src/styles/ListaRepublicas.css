@@ -6,6 +6,11 @@
     justify-content: space-between;
 }
 
+.filtros-home {
+    background-color: bisque;
+    margin: 10px;
+}
+
 .form-pesquisa {
     display: flex;
     flex-direction: row;

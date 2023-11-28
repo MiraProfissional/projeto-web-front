@@ -21,6 +21,7 @@ export default function Republica({republica}){
                     <li>Endereço: {republica.rua}, {republica.numero}</li>
                     <li>Moradores: {republica.qtdMembros}</li>
                     <li>Vagas: {republica.vagasDisponiveis}</li>
+                    <button className='btn btn-rep'><Link className="link-cadastro" to="/criar-user">Acessar página</Link></button>
                 </ul>
             </section>
         </>
