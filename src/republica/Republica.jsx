@@ -11,7 +11,7 @@ export default function Republica({republica}){
             <section className='card-rep'>
                 <header>
                     <figure>
-                        <img src={logoPoquito} alt="" />
+                        <img src={`src/assets/${caminhoImagem}.png`} alt="" />
                     </figure>
                     <ul>
                         <li>Nome: {republica.nome}</li>

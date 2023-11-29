@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import Navbar from "../navbar/Navbar";
 import axios from 'axios';
+import CreateInscricao from "../inscricoes/CreateInscricao";
 
 export default function PagRepublica(){
 
+    // Buscando o nome da republica através da URL
+    const { nome } = useParams();
+
     const [validado, setValidado] = useState(false);
     const [resposta, setResposta] = useState(null);
-
+    const [msg, setMsg] = useState();
+    const [userCriado,setUserCriado] = useState(false);
     
     const config = {
         headers:{
@@ -15,11 +21,10 @@ export default function PagRepublica(){
     }
 
     useEffect(() => {
-
         
         async function valida(){
             try{
-                const resposta = await axios.get(`http://localhost:3000/republica/:nome`,config);
+                const resposta = await axios.get(`http://localhost:3000/republica/${nome}`,config);
                 setResposta(resposta)
                 if(resposta.status === 200)
                     setValidado(true);
@@ -43,7 +48,12 @@ export default function PagRepublica(){
                 </section>
                 <button  className='btn btn-inscricao'>Inscrever</button>
             </section>
+            
         </>   
     )
 }
 
+/* <p className='server-response'>{msg}</p>
+            
+            <CreateInscricao style={{visibility : userCriado ? 'visible' : 'hidden' }}/>
+*/

@@ -92,11 +92,6 @@ export default function CreateInscricao(republica){
 
                 <button>Enviar inscrição</button>
             </form>
-
-            <p className='server-response'>{msg}</p>
-            <Link to="/republicas"
-            style={{visibility : userCriado ? 'visible' : 'hidden' }}
-            >Fazer Login</Link>
             
         </>
     )
