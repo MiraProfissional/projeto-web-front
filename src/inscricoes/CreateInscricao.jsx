@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import {set, useForm} from 'react-hook-form';
 import axios from 'axios';
 import * as yup from 'yup';
@@ -7,8 +7,14 @@ import { Link } from 'react-router-dom';
 
 export default function CreateInscricao({republica}){
 
+    const [republicaId, setRepublicaId] = useState(republica);
     const [msg, setMsg] = useState();
     const [userCriado,setUserCriado] = useState(false);
+    const [validado, setValidado] = useState(false);
+    const [resposta, setResposta] = useState(null);
+    const [username, setUsername] = useState(resposta && resposta.data["username"]);
+
+    console.log(resposta)
 
     const schema = yup.object({
         nome: yup.string().required('O preenchimento do campo Usuário é obrigatório'),
@@ -33,7 +39,8 @@ export default function CreateInscricao({republica}){
     const submit = async (data) => {
         
         try {
-            const response = await axios.post('http://localhost:3000/create-inscricao', data);
+            //Envio dos dados do formulário + idRep + idUsername
+            const response = await axios.post('http://localhost:3000/create-inscricao', {...data,republicaId,username});
 
             setMsg(response.data);
             if(response.data.includes('sucesso'))
@@ -44,6 +51,35 @@ export default function CreateInscricao({republica}){
         
     }
 
+    const config = {
+        headers:{
+            'Authorization' : 'Bearer '.concat(sessionStorage.getItem('token'))
+        }
+    }
+
+    useEffect(() => {
+
+        async function valida(){
+            try{
+                const resposta = await axios.get(`http://localhost:3000/mi`,config);
+
+                //Armazena o objeto da requisição na variável "resposta"
+                setResposta(resposta)
+                setUsername(resposta.data["id"])
+                
+                if (resposta.status === 200) {
+                    setValidado(true);
+                }
+            }catch(error){
+                setValidado(false);
+            }
+        }
+        valida();
+    }, []);
+    
+    if(!validado){
+        return <p>Token Inválido</p>
+    }
 
     return (
         <>

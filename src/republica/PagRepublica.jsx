@@ -53,7 +53,7 @@ export default function PagRepublica(){
                 <button onClick={handleInscrever} style={{visibility : formAtivo ? 'hidden' : 'visible' }} className='btn btn-inscricao'>Inscrever</button>
             </section>
             <section>
-                {formAtivo && <CreateInscricao ref={createInscricaoRef} republica={resposta.data.nome} style={{visibility : 'visible' }}/>}
+                {formAtivo && <CreateInscricao ref={createInscricaoRef} republica={resposta.data.id} style={{visibility : 'visible' }}/>}
             </section>
         </>   
     )
