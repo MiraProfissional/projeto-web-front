@@ -46,9 +46,9 @@ export default function PagRepublica(){
                 <Navbar/>
                 <div></div>
                     <figure>
-                        {/* <img src={} alt="" /> */}
+                        <img src={`../src/assets/${resposta.data.img}.png`} alt="" />
                         <figcaption>
-                            <h3>Nome e ano da República</h3>                    
+                            <h3>{resposta.data.nome} ({resposta.data.anoDeCriacao})</h3>                    
                         </figcaption>
                     </figure>
                     <div className="box-descricao">
