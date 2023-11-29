@@ -50,7 +50,7 @@ export default function PagRepublica(){
                 <Navbar/>
                 <div></div>
                     <figure>
-                        <img src={`../src/assets/${resposta.data.img}.png`} alt="" />
+                        <img className="logo-rep" src={`../src/assets/${resposta.data.logo}.png`} alt="" />
                         <figcaption>
                             <h3>{resposta.data.nome} ({resposta.data.anoDeCriacao})</h3>                    
                         </figcaption>
@@ -58,8 +58,9 @@ export default function PagRepublica(){
                     <div className="box-descricao">
                         <section className="descricao">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam possimus quibusdam blanditiis et modi itaque magni. Obcaecati, iste exercitationem deleniti facere tempora non blanditiis! Similique error tempore voluptatibus. Corporis, quaerat.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam possimus quibusdam blanditiis et modi itaque magni. Obcaecati, iste exercitationem deleniti facere tempora non blanditiis! Similique error tempore voluptatibus. Corporis, quaerat.</p>
                             <figure>
-                                {/* <img className="foto-rep" src={logoPoquito} alt="" /> */}
+                                <img className="img-rep" src={`../src/assets/${resposta.data.img}.png`} alt="" />
                             </figure>
                         </section>
                 </div>
@@ -67,7 +68,7 @@ export default function PagRepublica(){
                 
                 </section>
                 <section className="botao">   
-                <button onClick={handleInscrever} style={{visibility : formAtivo ? 'hidden' : 'visible' }} className='btn btn-inscricao'>Inscrever</button>
+                <button onClick={handleInscrever} style={{visibility : formAtivo ? 'hidden' : 'visible' }} className='btn btn-inscricao'>Inscrever-se</button>
                 </section>
                 
             </section>
