@@ -3,7 +3,7 @@ import '../styles/Republica.css';
 import logoPoquito from '../assets/logo-poquito.png';
 
 export default function Republica({republica}){
-    let caminhoImagem = republica.img;
+    let caminhoImagem = republica.logo;
 
     return (
         <>
