@@ -64,10 +64,8 @@ export default function ListaRepublicas(){
                             <option value="">Selecione uma opção</option>
                             <option value="masculino">Masculina</option>
                             <option value="feminina">Feminina</option>
-                            <option value="mista">Mista</option>
+                            <option value="mista">Miste</option>
                         </select>
-                        
-                    
                     <button>Buscar</button>
                     </form>
                 </section>

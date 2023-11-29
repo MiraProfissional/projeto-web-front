@@ -4,6 +4,9 @@ import Navbar from "../navbar/Navbar";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from 'react-router-dom';
+import '../styles/PagRepublica.css';
+import logoPoquito from '../assets/logo-poquito.png';
+
 
 export default function PagRepublica(){
 
@@ -46,12 +49,28 @@ export default function PagRepublica(){
     }
     return(
         <>  
-            <section id='pag-republica'>
+            <section  id='pag-republica'>
                 <Navbar/>
-                <section className="filtros-home">
+                <figure>
+                    <img src={logoPoquito} alt="" />
+                    <figcaption>
+                        <h3>Nome e ano da República</h3>                    
+                    </figcaption>
+                </figure>
+                <div className="box-descricao">
+                    <section className="descricao">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam possimus quibusdam blanditiis et modi itaque magni. Obcaecati, iste exercitationem deleniti facere tempora non blanditiis! Similique error tempore voluptatibus. Corporis, quaerat.</p>
+                        <figure>
+                            <img className="foto-rep" src={logoPoquito} alt="" />
+                        </figure>
+                    </section>
+                </div>
+                {/* <section className="filtros-home">
                     <BuscaRepublica formData={formData} config={config}/>
+                </section> */}
+                <section className="botao">
+                    <button className='btn btn-inscricao'><Link to={`/create-inscricao`}>Inscrever</Link></button>
                 </section>
-                <button className='btn btn-inscricao'><Link to={`/create-inscricao`}>Inscrever</Link></button>
             </section>
         </>   
     )
@@ -79,7 +98,7 @@ export function BuscaRepublica({formData, config}){
             }catch(error){
                 setMsg(error.response.data);
                 setRepublica(<p></p>);
-                
+
             }
         }
         submit();

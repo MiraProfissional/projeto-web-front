@@ -1,0 +1,42 @@
+figure{
+    text-align: center;
+}
+
+.botao{
+    text-align: center;
+    margin-top: 10px;
+}
+
+img{
+    border-radius: 50%;
+}
+
+h3{
+    margin: 0;
+}
+
+.descricao{
+    border: 1px black solid;
+    border-radius: 10px;
+    text-align: center;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.foto_rep{
+    text-align: center;
+}
+
+.box-descricao{
+    display: flex;
+    justify-content: center;
+}
+
+.foto-rep{
+    height: 150px;
+    width: 150px;
+
+}
+
