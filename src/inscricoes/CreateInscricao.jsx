@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import {set, useForm} from 'react-hook-form';
 import axios from 'axios';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function CreateInscricao(){
+export default function CreateInscricao(republica){
 
     const [msg, setMsg] = useState();
     const [userCriado,setUserCriado] = useState(false);
@@ -26,8 +26,6 @@ export default function CreateInscricao(){
         resolver: yupResolver(schema)
     });
 
-    
-
     const { register, handleSubmit, formState } = form;
 
     const {errors} = formState;
@@ -36,19 +34,25 @@ export default function CreateInscricao(){
         
         try {
             const response = await axios.post('http://localhost:3000/create-inscricao', data);
-            setMsg(response.data);
-            if(response.data.includes('sucesso'))
-                setUserCriado(true);
+
+            //Extrair o token
+            const token = response.data.token;
+            sessionStorage.setItem('token', token);
+            if(token) 
+                setMsg('Autenticado');
         } catch (error) {
             setMsg(error.response.data);
         }   
         
-        
+    }
+
+    if(msg.toLowerCase().includes('autenticado')){
+        return <Navigate to='/republicas' />
     }
 
     return (
         <>
-            <h2>Crie uma nova conta</h2>
+            <h2>Bem vindo ao processo seletivo da república {}</h2>
             <form onSubmit={handleSubmit(submit)} noValidate>
                 <label htmlFor="nome" placeholder="nome">Nome</label>
                 <input type="text" id="nome" {...register('nome')} />
