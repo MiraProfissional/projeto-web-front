@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from 'react-router-dom';
 import Navbar from "../navbar/Navbar";
 import axios from 'axios';
@@ -12,8 +12,8 @@ export default function PagRepublica(){
 
     const [validado, setValidado] = useState(false);
     const [resposta, setResposta] = useState(null);
-    const [msg, setMsg] = useState();
-    const [userCriado,setUserCriado] = useState(false);
+    const [formAtivo,setFormAtivo] = useState(false);
+    const createInscricaoRef = useRef();
     
     const config = {
         headers:{
@@ -37,6 +37,10 @@ export default function PagRepublica(){
         
     }, []);
     
+    const handleInscrever = () => {
+        setFormAtivo(true);
+    };
+
     if(!validado){
         return <p>Token Inválido</p>
     }
@@ -63,15 +67,14 @@ export default function PagRepublica(){
                 
                 </section>
                 <section className="botao">   
-                    <button  className='btn btn-inscricao'>Inscrever</button>
+                <button onClick={handleInscrever} style={{visibility : formAtivo ? 'hidden' : 'visible' }} className='btn btn-inscricao'>Inscrever</button>
                 </section>
+                
             </section>
-            
+            <section>
+                {formAtivo && <CreateInscricao ref={createInscricaoRef} republica={resposta.data.nome} style={{visibility : 'visible' }}/>}
+            </section>
         </>   
     )
 }
 
-/* <p className='server-response'>{msg}</p>
-            
-            <CreateInscricao style={{visibility : userCriado ? 'visible' : 'hidden' }}/>
-*/

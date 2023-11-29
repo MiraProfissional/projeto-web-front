@@ -1,8 +1,7 @@
-.teste{
+.container{
     display: flex;
-    justify-content:end;
-    width: 50%;
-    align-items: end;
+    width: 100%;
+    justify-content: end;
 }
 
 button{
@@ -13,4 +12,15 @@ button{
     text-align:start;
     font-size: 1.5rem;
     margin: 0;
+    width: 20%;
+}
+
+.btn-home{
+    width: 10%;
+}
+
+.teste{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }

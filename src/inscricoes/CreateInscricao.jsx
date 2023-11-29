@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 
-export default function CreateInscricao(republica){
+export default function CreateInscricao({republica}){
 
     const [msg, setMsg] = useState();
     const [userCriado,setUserCriado] = useState(false);
@@ -46,9 +46,6 @@ export default function CreateInscricao(republica){
         
     }
 
-    if(msg.toLowerCase().includes('autenticado')){
-        return <Navigate to='/republicas' />
-    }
 
     return (
         <>
@@ -75,7 +72,7 @@ export default function CreateInscricao(republica){
                 <p className='erro'>{errors.redeSocial?.message}</p>
 
                 <label htmlFor="celular" placeholder="celular">Celular</label>
-                <input type="number" id="celular" {...register('celular')} />
+                <input type="text" id="celular" {...register('celular')} />
                 <p className='erro'>{errors.celular?.message}</p>
 
                 <label htmlFor="sobre">Sobre</label>

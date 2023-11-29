@@ -38,17 +38,19 @@ export default function Navbar () {
 
     return (
         <>
-          <header className="navbar">
-            <h3 className='bv'>Bem vindo, {resposta.data["username"]}</h3>
             <section className='teste'>
-                <button className="btn-inscricoes">
-                    Minhas inscrições
-                </button>
+                <button className='btn-home'>Home</button>
+                <section className='container'>
+                    <button className="btn-inscricoes">
+                        Minhas inscrições
+                    </button>
                 <button className="btn-configuracoes" data-toggle="dropdown">
                     Configurações
                 </button>
+                </section>
             </section>
-          </header>
+            <h3 className='bv'>Bem vindo, {resposta.data["username"]}</h3>
+          
         </>
       );
 
