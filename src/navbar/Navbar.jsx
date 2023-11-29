@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Navbar.css';
+import { Link, Navigate } from 'react-router-dom';
 
 export default function Navbar () {
 
@@ -39,18 +40,13 @@ export default function Navbar () {
     return (
         <>
             <section className='teste'>
-                <button className='btn-home'>Home</button>
+            <button className="btn-home"><Link to={`/republicas`}>Home</Link></button> 
                 <section className='container'>
-                    <button className="btn-inscricoes">
-                        Minhas inscrições
-                    </button>
-                <button className="btn-configuracoes" data-toggle="dropdown">
-                    Configurações
-                </button>
+                    <button className="btn-inscricoes"><Link to={`/inscricoes`}>Minhas inscrições</Link></button> 
+                    <button className="btn-configuracoes"><Link to={`/configuracoes`}>Configurações</Link></button> 
                 </section>
             </section>
             <h3 className='bv'>Bem vindo, {resposta.data["username"]}</h3>
-          
         </>
       );
 
