@@ -73,7 +73,7 @@ export default function PagRepublica(){
                 
             </section>
             <section>
-                {formAtivo && <CreateInscricao ref={createInscricaoRef} republica={resposta.data.nome} style={{visibility : 'visible' }}/>}
+                {formAtivo && <CreateInscricao ref={createInscricaoRef} republica={resposta.data.id} style={{visibility : 'visible' }}/>}
             </section>
         </>   
     )
