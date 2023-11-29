@@ -86,7 +86,7 @@ export default function CreateInscricao({republica}){
         <>
             <h2 className='titulo-forms'>Bem vindo ao processo seletivo da república {}</h2>
             <form onSubmit={handleSubmit(submit)} noValidate>
-                <h3>Informações Pessoais</h3>
+                <h2>Informações Pessoais</h2>
                 <div className='perguntas-forms'>
                     <section>
                         <label htmlFor="nome" placeholder="nome">Nome</label>
@@ -125,18 +125,18 @@ export default function CreateInscricao({republica}){
                     </section>
 
                     <section className='sub-titulo'>
-                        <h3>Informações adicionais</h3>
+                        <h2>Informações adicionais</h2>
                     </section>
 
                     <section>   
                         <label htmlFor="sobre">Sobre</label>
-                        <input className='tam2' type="textarea" id="sobre" {...register('sobre')} />
+                        <input className='tam2' type="text" id="sobre" {...register('sobre')} />
                         <p className='erro'>{errors.sobre?.message}</p>  
                     </section>   
 
                     <section>
                         <label htmlFor="curiosidade">Curiosidade</label>
-                        <input className='tam2' type="textarea" id="curiosidade" {...register('curiosidade')} />
+                        <input className='tam2' type="text" id="curiosidade" {...register('curiosidade')} />
                         <p className='erro'>{errors.curiosidade?.message}</p>
                     </section>
 
