@@ -35,7 +35,7 @@ export default function ListaRepublicas(){
         async function valida(){
             try{
                 const resposta = await axios.get(`http://localhost:3000/republicas`,config);
-                console.log(resposta);
+    
                 if (resposta.status === 200) {
                     setValidado(true);
                 }

@@ -35,11 +35,9 @@ export default function CreateInscricao({republica}){
         try {
             const response = await axios.post('http://localhost:3000/create-inscricao', data);
 
-            //Extrair o token
-            const token = response.data.token;
-            sessionStorage.setItem('token', token);
-            if(token) 
-                setMsg('Autenticado');
+            setMsg(response.data);
+            if(response.data.includes('sucesso'))
+                setUserCriado(true);
         } catch (error) {
             setMsg(error.response.data);
         }   
