@@ -30,19 +30,15 @@ export default function ListaRepublicas(){
         }
     }
 
-    
-    const user = async () => await axios.get('http://localhost:3000/mi',config)
-    console.log('Aqui em baixo')
-    console.log(user)
-
     useEffect(() => {
 
         async function valida(){
             try{
                 const resposta = await axios.get(`http://localhost:3000/republicas`,config);
                 console.log(resposta);
-                if(resposta.status === 200)
+                if (resposta.status === 200) {
                     setValidado(true);
+                }
             }catch(error){
                 setValidado(false);
             }

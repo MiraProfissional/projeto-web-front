@@ -33,10 +33,6 @@ const router = createBrowserRouter([
   {
     path: 'republicas/:nome',
     element: <ListaRepublicas />
-  },
-  {
-    path: 'republica/:nome',
-    element: <PagRepublica/>
   }
 
 ]);
