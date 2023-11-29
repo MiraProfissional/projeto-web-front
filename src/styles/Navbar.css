@@ -10,5 +10,7 @@ button{
 }
 
 .bv{
-    font-size: 1.8rem;
+    text-align:start;
+    font-size: 1.5rem;
+    margin: 0;
 }

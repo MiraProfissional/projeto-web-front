@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import Navbar from "../navbar/Navbar";
 import axios from 'axios';
+import '../styles/PagRepublica.css';
 import CreateInscricao from "../inscricoes/CreateInscricao";
 
 export default function PagRepublica(){
@@ -45,6 +46,7 @@ export default function PagRepublica(){
                 <Navbar/>
                 <div></div>
                     <figure>
+                        {/* <img src={} alt="" /> */}
                         <figcaption>
                             <h3>Nome e ano da República</h3>                    
                         </figcaption>
@@ -53,14 +55,16 @@ export default function PagRepublica(){
                         <section className="descricao">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam possimus quibusdam blanditiis et modi itaque magni. Obcaecati, iste exercitationem deleniti facere tempora non blanditiis! Similique error tempore voluptatibus. Corporis, quaerat.</p>
                             <figure>
-                               
+                                {/* <img className="foto-rep" src={logoPoquito} alt="" /> */}
                             </figure>
                         </section>
                 </div>
                 <section className="filtros-home">
                 
                 </section>
-                <button  className='btn btn-inscricao'>Inscrever</button>
+                <section className="botao">   
+                    <button  className='btn btn-inscricao'>Inscrever</button>
+                </section>
             </section>
             
         </>   
