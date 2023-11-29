@@ -10,7 +10,7 @@ export default function Republica({republica}){
             <div className='card-rep'>
                 <section className='teste1'>
                     <figure>
-                        <img src={logoPoquito} alt="" />
+                        <img src={`src/assets/${caminhoImagem}.png`} alt="" />
                         <figcaption>{republica.nome} {republica.anoDeCriacao}</figcaption>
                     </figure>
                 </section>
