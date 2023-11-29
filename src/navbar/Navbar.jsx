@@ -39,6 +39,7 @@ export default function Navbar () {
         <>
           <header className="navbar">
             <p>Bem vindo {resposta.data["username"]}</p>
+            <button>Home</button>
             <button className="btn-inscricoes">Minhas inscrições</button>
             <button className="btn-configuracoes" data-toggle="dropdown">
               Configurações
