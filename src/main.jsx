@@ -31,10 +31,9 @@ const router = createBrowserRouter([
     element: <ListaRepublicas />
   },
   {
-    path: 'republicas/:nome',
-    element: <ListaRepublicas />
+    path: 'republica/:nome',
+    element: <PagRepublica/>
   }
-
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

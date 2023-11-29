@@ -3,6 +3,7 @@ import Republica from "./Republica";
 import Navbar from "../navbar/Navbar";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
+import { Link, Navigate } from 'react-router-dom';
 
 export default function PagRepublica(){
 
@@ -59,29 +60,25 @@ export default function PagRepublica(){
 export function BuscaRepublica({formData, config}){
 
     const [msg, setMsg] = useState('');
-    const [republicas, setRepublicas] = useState(<p>...</p>);
-    const view = [];
+    const [republica, setRepublica] = useState(<p>...</p>);
 
     useEffect(() => {
 
         const submit = async () => {
-            let endPoint = 'http://localhost:3000/republicas';
+            let endPoint = 'http://localhost:3000//republicas/:nome';
             endPoint = `${endPoint}/${formData.nome}`
             try{
                 const dados = await axios.get(`${endPoint}`, config);
                 if(Array.isArray(dados.data)){
                     for(let republica of dados.data){
                         // Aqui deve ter uma condição para buscar pela república específica
-                        view.push(<Republica republica={republica} />);
+                        setRepublica(<Republica republica={republica} />);
                     }
-                }else{
-                    view.push(<Republica republica={dados.data} />);
                 }
-                setRepublicas(view);
                 setMsg('');
             }catch(error){
                 setMsg(error.response.data);
-                setRepublicas(<p></p>);
+                setRepublica(<p></p>);
                 
             }
         }
@@ -90,7 +87,7 @@ export function BuscaRepublica({formData, config}){
 
     return(
         <>
-            {republicas}
+            {republica}
             {msg}
         </>
     )
