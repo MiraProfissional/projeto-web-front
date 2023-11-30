@@ -36,10 +36,13 @@ export default function ListaInscricoes(){
                 if (respostaUser.status === 200) {
                     try {
                         const resposta = await axios.get(`http://localhost:3000/inscricoes/${respostaUser.data["inscricoes"]}`, config);
-                            setResposta(resposta)
+                        
                         // Verifica se a resposta da segunda chamada foi bem-sucedida
                         if (resposta.status === 200) {
                             setValidado(true);
+                            setResposta(resposta)
+                        } else {
+                            setResposta('Você não possui inscrições')
                         }
                     } catch (error) {
                         setValidado(false);
