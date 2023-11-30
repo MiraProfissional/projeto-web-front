@@ -3,3 +3,12 @@
     flex-direction: column;
     align-items: center;
 }
+
+.btn{
+    width: 150px;
+    margin: auto;
+}
+
+li{
+    list-style-type: none;
+}

@@ -4,10 +4,6 @@
     justify-content: end;
 }
 
-button{
-    height: 58px;
-}
-
 .bv{
     text-align:start;
     font-size: 1.5rem;
@@ -17,6 +13,7 @@ button{
 
 .btn-home{
     width: 10%;
+    margin-left: 0;
 }
 
 .teste{
@@ -24,3 +21,10 @@ button{
     flex-direction: row;
     width: 100%;
 }
+
+.btn{
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+

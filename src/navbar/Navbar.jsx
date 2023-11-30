@@ -40,13 +40,13 @@ export default function Navbar () {
     return (
         <>
             <section className='teste'>
-            <button className="btn-home"><Link to={`/republicas`}>Home</Link></button> 
+                <h3 className='bv'>Bem vindo, {resposta.data["username"]}</h3>
+                <Link className="btn btn-home" to={`/republicas`}>Home</Link>
+                <Link className="btn btn-inscricoes" to={`/inscricoes`}>Minhas inscrições</Link>
                 <section className='container'>
-                    <button className="btn-inscricoes"><Link to={`/inscricoes`}>Minhas inscrições</Link></button> 
-                    <button className="btn-configuracoes"><Link to={`/configuracoes`}>Configurações</Link></button> 
+                    <Link className="btn btn-configuracoes" to={`/configuracoes`}>Configurações</Link>
                 </section>
             </section>
-            <h3 className='bv'>Bem vindo, {resposta.data["username"]}</h3>
         </>
       );
 
