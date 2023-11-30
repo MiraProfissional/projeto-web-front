@@ -43,10 +43,6 @@ export default function CreateInscricao({republica}){
             //Envio dos dados do formulário + idRep + idUsername
             const response = await axios.post('http://localhost:3000/create-inscricao', {...data,republicaId,username});
 
-            const response1 = await axios.post('http://localhost:3000/lista-inscricoes', {username});
-
-            const response2 = await axios.post('http://localhost:3000/delete-inscricao', {republicaId, username});
-
             setMsg(response.data);
             if(response.data.includes('sucesso'))
                 setUserCriado(true);

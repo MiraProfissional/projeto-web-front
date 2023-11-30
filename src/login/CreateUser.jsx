@@ -62,13 +62,12 @@ export default function CreateUser(){
                 <input type="password" id="passwordConf" {...register('passwordConf')} />
                 <p className='erro'>{errors.passwordConf?.message}</p>     
 
+                <p className='server-response'>{msg} <Link to="/"
+                style={{visibility : userCriado ? 'visible' : 'hidden' }}
+                >Fazer Login</Link></p>
+
                 <button>Criar Usuário</button>
             </form>
-
-            <p className='server-response'>{msg}</p>
-            <Link to="/"
-            style={{visibility : userCriado ? 'visible' : 'hidden' }}
-            >Fazer Login</Link>
             
         </>
     )
