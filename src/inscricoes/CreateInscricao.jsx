@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useRef } from 'react';
 import {set, useForm} from 'react-hook-form';
 import axios from 'axios';
 import * as yup from 'yup';
@@ -10,10 +10,12 @@ export default function CreateInscricao({republica}){
 
     const [republicaId, setRepublicaId] = useState(republica);
     const [msg, setMsg] = useState();
-    const [userCriado,setUserCriado] = useState(false);
+    const [formAtivo,setFormAtivo] = useState(false);
     const [validado, setValidado] = useState(false);
     const [resposta, setResposta] = useState(null);
-    const [username, setUsername] = useState(resposta && resposta.data["username"]);
+    const [respostaUser, setRespostaUser] = useState(null);
+    const [republicaNome, setRepublicaNome] = useState(resposta && resposta.data["nome"]);
+    const createInscricaoRef = useRef();
 
     console.log(resposta)
 
@@ -45,7 +47,7 @@ export default function CreateInscricao({republica}){
 
             setMsg(response.data);
             if(response.data.includes('sucesso'))
-                setUserCriado(true);
+                setinscricaoCriada(true);
         } catch (error) {
             setMsg(error.response.data);
         }   
@@ -58,25 +60,44 @@ export default function CreateInscricao({republica}){
         }
     }
 
+
     useEffect(() => {
 
-        async function valida(){
-            try{
-                const resposta = await axios.get(`http://localhost:3000/mi`,config);
-
-                //Armazena o objeto da requisição na variável "resposta"
-                setResposta(resposta)
-                setUsername(resposta.data["id"])
+        async function valida() {
+            try {
+                const respostaUser = await axios.get('http://localhost:3000/mi', config);
                 
-                if (resposta.status === 200) {
+                // Chama a segunda função apenas se a primeira for bem-sucedida
+                if (respostaUser.status === 200) {
+                    setRespostaUser(respostaUser.data); // Ajusta para armazenar a propriedade 'data' da resposta
                     setValidado(true);
+                
+                    try{
+                        const resposta = await axios.get(`http://localhost:3000/republicaId/${republicaId}`,config);
+                        console.log('Aqui')
+                        console.log(resposta)
+                        //Armazena o objeto da requisição na variável "resposta"
+                        setResposta(resposta)
+                        setRepublicaNome(resposta.data["nome"])
+                        
+                        if (resposta.status === 200) {
+                            setValidado(true);
+                        }
+                    }catch(error){
+                        setValidado(false);
+                    }
                 }
-            }catch(error){
+            } catch (error) {
                 setValidado(false);
             }
         }
+    
         valida();
     }, []);
+
+    const handleInscrever = () => {
+        setFormAtivo(true);
+    };
     
     if(!validado){
         return <p>Token Inválido</p>
@@ -84,7 +105,7 @@ export default function CreateInscricao({republica}){
 
     return (
         <>
-            <h2 className='titulo-forms'>Bem vindo ao processo seletivo da república {}</h2>
+            <h2 className='titulo-forms'>Bem vindo ao processo seletivo da república {republicaNome}</h2>
             <form onSubmit={handleSubmit(submit)} noValidate>
                 <h2>Informações Pessoais</h2>
                 <div className='perguntas-forms'>
@@ -146,9 +167,13 @@ export default function CreateInscricao({republica}){
                         <p className='erro'>{errors.motivoEscolha?.message}</p>
                     </section>
                 </div>
-                <button>Enviar inscrição</button>
+                <button onClick={handleInscrever} >Enviar inscrição</button>
             </form>
             
+            <section>
+                {formAtivo && <CreateInscricao ref={createInscricaoRef} republica={resposta.data.id} style={{visibility : 'visible' }}/>}
+            </section>
+
         </>
     )
 

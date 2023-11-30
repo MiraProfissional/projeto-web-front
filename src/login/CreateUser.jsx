@@ -68,6 +68,11 @@ export default function CreateUser(){
 
                 <button>Criar Usuário</button>
             </form>
+
+            <p className='server-response'>{msg}</p>
+            <Link to="/"
+            style={{visibility : userCriado ? 'visible' : 'hidden' }}
+            >Fazer Login</Link>
             
         </>
     )
