@@ -1,7 +1,8 @@
 .container{
-    display: flex;
-    width: 100%;
-    justify-content: end;
+    width: 90%;
+    text-align: end;
+    margin: auto;
+    margin-right: 30px;
 }
 
 .bv{
@@ -13,7 +14,6 @@
 
 .btn-home{
     width: 10%;
-    margin-left: 0;
 }
 
 .teste{
@@ -26,5 +26,3 @@
     margin-top: 10px;
     text-decoration: none;
 }
-
-

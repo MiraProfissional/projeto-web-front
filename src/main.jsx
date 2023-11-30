@@ -12,6 +12,7 @@ import ListaRepublicas from './republica/ListaRepublicas.jsx';
 import PagRepublica from './republica/PagRepublica.jsx';
 import CreateInscricao from './inscricoes/CreateInscricao.jsx';
 import ListaInscricoes from './inscricoes/ListaInscricoes.jsx';
+import EditaConfig from './configuracoes/EditaConfig.jsx';
 
 //Adicionando as rotas
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: 'inscricoes',
     element: <ListaInscricoes/>
+  },
+  {
+    path: 'configuracoes',
+    element: <EditaConfig/>
   }
 ]);
 

@@ -42,7 +42,7 @@ export default function Navbar () {
             <section className='teste'>
                 <h3 className='bv'>Bem vindo, {resposta.data["username"]}</h3>
                 <Link className="btn btn-home" to={`/republicas`}>Home</Link>
-                <Link className="btn btn-inscricoes" to={`/inscricoes`}>Minhas inscrições</Link>
+                <Link className="btn-inscricoes " to={`/inscricoes`}>Minhas inscrições</Link>
                 <section className='container'>
                     <Link className="btn btn-configuracoes" to={`/configuracoes`}>Configurações</Link>
                 </section>

@@ -23,7 +23,6 @@ export default function ListaInscricoes(){
         async function valida() {
             try {
                 const respostaUser = await axios.get('http://localhost:3000/mi', config);
-
                 // Verifica se a resposta foi bem-sucedida
                 if (respostaUser.status === 200) {
                     setRespostaUser(respostaUser.data); // Ajusta para armazenar a propriedade 'data' da resposta
@@ -35,8 +34,11 @@ export default function ListaInscricoes(){
                 // Chama a segunda função apenas se a primeira for bem-sucedida
                 if (respostaUser.status === 200) {
                     try {
+                        
                         const resposta = await axios.get(`http://localhost:3000/inscricoes/${respostaUser.data["inscricoes"]}`, config);
-                            setResposta(resposta)
+                        setResposta(resposta)
+                        console.log(resposta.status);
+                        console.log("Resposta status");
                         // Verifica se a resposta da segunda chamada foi bem-sucedida
                         if (resposta.status === 200) {
                             setValidado(true);
@@ -60,14 +62,13 @@ export default function ListaInscricoes(){
 
     return(
         <>  
-        <Navbar/>
-        <section className="pag-minhas-inscricoes">
-            <h1>Minhas Inscrições</h1>
-            <h2>Liste suas inscrições</h2>
-
-            <button>Listar</button>
-        </section>
-
+            <Navbar/>
+            <section className="pag-minhas-inscricoes">
+                <h1>Minhas Inscrições</h1>
+                <h2>Liste suas inscrições</h2>
+                
+                <button>Listar</button>
+            </section>
         </>   
     )
 }
