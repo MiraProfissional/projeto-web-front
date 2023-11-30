@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useRef } from 'react';
 import {set, useForm} from 'react-hook-form';
 import axios from 'axios';
 import * as yup from 'yup';
@@ -10,10 +10,11 @@ export default function CreateInscricao({republica}){
 
     const [republicaId, setRepublicaId] = useState(republica);
     const [msg, setMsg] = useState();
-    const [userCriado,setUserCriado] = useState(false);
+    const [formAtivo,setFormAtivo] = useState(false);
     const [validado, setValidado] = useState(false);
     const [resposta, setResposta] = useState(null);
     const [username, setUsername] = useState(resposta && resposta.data["username"]);
+    const createInscricaoRef = useRef();
 
     console.log(resposta)
 
@@ -45,7 +46,7 @@ export default function CreateInscricao({republica}){
 
             setMsg(response.data);
             if(response.data.includes('sucesso'))
-                setUserCriado(true);
+                setinscricaoCriada(true);
         } catch (error) {
             setMsg(error.response.data);
         }   
@@ -77,6 +78,10 @@ export default function CreateInscricao({republica}){
         }
         valida();
     }, []);
+
+    const handleInscrever = () => {
+        setFormAtivo(true);
+    };
     
     if(!validado){
         return <p>Token Inválido</p>
@@ -146,9 +151,13 @@ export default function CreateInscricao({republica}){
                         <p className='erro'>{errors.motivoEscolha?.message}</p>
                     </section>
                 </div>
-                <button>Enviar inscrição</button>
+                <button onClick={handleInscrever} >Enviar inscrição</button>
             </form>
             
+            <section>
+                {formAtivo && <CreateInscricao ref={createInscricaoRef} republica={resposta.data.id} style={{visibility : 'visible' }}/>}
+            </section>
+
         </>
     )
 
