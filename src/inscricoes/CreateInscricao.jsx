@@ -1,10 +1,9 @@
-import { useEffect,useState,useRef } from 'react';
+import { useEffect,useState, useRef } from 'react';
 import {set, useForm} from 'react-hook-form';
 import axios from 'axios';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
-import '../styles/PagRepublica.css';
 
 export default function CreateInscricao({republica}){
 
@@ -15,9 +14,8 @@ export default function CreateInscricao({republica}){
     const [resposta, setResposta] = useState(null);
     const [respostaUser, setRespostaUser] = useState(null);
     const [republicaNome, setRepublicaNome] = useState(resposta && resposta.data["nome"]);
+    const [username, setUsername] = useState(respostaUser && respostaUser.data["id"]);
     const createInscricaoRef = useRef();
-
-    console.log(resposta)
 
     const schema = yup.object({
         nome: yup.string().required('O preenchimento do campo Usuário é obrigatório'),
@@ -40,11 +38,11 @@ export default function CreateInscricao({republica}){
     const {errors} = formState;
 
     const submit = async (data) => {
-        
+        setFormAtivo(true);
         try {
             //Envio dos dados do formulário + idRep + idUsername
-            const response = await axios.post('http://localhost:3000/create-inscricao', {...data,republicaId,username});
-
+            const response = await axios.post('http://localhost:3000/create-inscricao', {...data,republicaId,username}, config);
+            
             setMsg(response.data);
             if(response.data.includes('sucesso'))
                 setinscricaoCriada(true);
@@ -69,13 +67,14 @@ export default function CreateInscricao({republica}){
                 
                 // Chama a segunda função apenas se a primeira for bem-sucedida
                 if (respostaUser.status === 200) {
-                    setRespostaUser(respostaUser.data); // Ajusta para armazenar a propriedade 'data' da resposta
+                    
+                    setRespostaUser(respostaUser); // Ajusta para armazenar a propriedade 'data' da resposta
+                    setUsername(respostaUser.data["id"])
                     setValidado(true);
                 
                     try{
                         const resposta = await axios.get(`http://localhost:3000/republicaId/${republicaId}`,config);
-                        console.log('Aqui')
-                        console.log(resposta)
+                    
                         //Armazena o objeto da requisição na variável "resposta"
                         setResposta(resposta)
                         setRepublicaNome(resposta.data["nome"])
@@ -94,10 +93,6 @@ export default function CreateInscricao({republica}){
     
         valida();
     }, []);
-
-    const handleInscrever = () => {
-        setFormAtivo(true);
-    };
     
     if(!validado){
         return <p>Token Inválido</p>
@@ -107,7 +102,7 @@ export default function CreateInscricao({republica}){
         <>
             <h2 className='titulo-forms'>Bem vindo ao processo seletivo da república {republicaNome}</h2>
             <form onSubmit={handleSubmit(submit)} noValidate>
-                <h2>Informações Pessoais</h2>
+                <h3>Informações Pessoais</h3>
                 <div className='perguntas-forms'>
                     <section>
                         <label htmlFor="nome" placeholder="nome">Nome</label>
@@ -147,7 +142,6 @@ export default function CreateInscricao({republica}){
 
                     <section className='sub-titulo'>
                         <h3>Informações adicionais</h3>
-                    </section>
 
                     <section>   
                         <label htmlFor="sobre">Sobre</label>
@@ -166,12 +160,13 @@ export default function CreateInscricao({republica}){
                         <input className='tam2' type="textarea" id="motivoEscolha" {...register('motivoEscolha')} />
                         <p className='erro'>{errors.motivoEscolha?.message}</p>
                     </section>
+                    </section>
                 </div>
-                <button onClick={handleInscrever} >Enviar inscrição</button>
+                <button style={{visibility : formAtivo ? 'hidden' : 'visible' }}>Enviar inscrição</button>
             </form>
             
             <section>
-                {formAtivo && <CreateInscricao ref={createInscricaoRef} republica={resposta.data.id} style={{visibility : 'visible' }}/>}
+                {formAtivo && <Link to="/republicas"  ref={createInscricaoRef} style={{visibility : 'visible' }}>  Voltar</Link>}
             </section>
 
         </>

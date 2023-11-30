@@ -23,6 +23,7 @@ export default function ListaInscricoes(){
         async function valida() {
             try {
                 const respostaUser = await axios.get('http://localhost:3000/mi', config);
+
                 // Verifica se a resposta foi bem-sucedida
                 if (respostaUser.status === 200) {
                     setRespostaUser(respostaUser.data); // Ajusta para armazenar a propriedade 'data' da resposta
