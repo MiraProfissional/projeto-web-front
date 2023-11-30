@@ -13,7 +13,8 @@ export default function CreateInscricao({republica}){
     const [formAtivo,setFormAtivo] = useState(false);
     const [validado, setValidado] = useState(false);
     const [resposta, setResposta] = useState(null);
-    const [username, setUsername] = useState(resposta && resposta.data["username"]);
+    const [respostaUser, setRespostaUser] = useState(null);
+    const [republicaNome, setRepublicaNome] = useState(resposta && resposta.data["nome"]);
     const createInscricaoRef = useRef();
 
     console.log(resposta)
@@ -59,23 +60,38 @@ export default function CreateInscricao({republica}){
         }
     }
 
+
     useEffect(() => {
 
-        async function valida(){
-            try{
-                const resposta = await axios.get(`http://localhost:3000/mi`,config);
-
-                //Armazena o objeto da requisição na variável "resposta"
-                setResposta(resposta)
-                setUsername(resposta.data["id"])
+        async function valida() {
+            try {
+                const respostaUser = await axios.get('http://localhost:3000/mi', config);
                 
-                if (resposta.status === 200) {
+                // Chama a segunda função apenas se a primeira for bem-sucedida
+                if (respostaUser.status === 200) {
+                    setRespostaUser(respostaUser.data); // Ajusta para armazenar a propriedade 'data' da resposta
                     setValidado(true);
+                
+                    try{
+                        const resposta = await axios.get(`http://localhost:3000/republicaId/${republicaId}`,config);
+                        console.log('Aqui')
+                        console.log(resposta)
+                        //Armazena o objeto da requisição na variável "resposta"
+                        setResposta(resposta)
+                        setRepublicaNome(resposta.data["nome"])
+                        
+                        if (resposta.status === 200) {
+                            setValidado(true);
+                        }
+                    }catch(error){
+                        setValidado(false);
+                    }
                 }
-            }catch(error){
+            } catch (error) {
                 setValidado(false);
             }
         }
+    
         valida();
     }, []);
 
@@ -89,7 +105,7 @@ export default function CreateInscricao({republica}){
 
     return (
         <>
-            <h2 className='titulo-forms'>Bem vindo ao processo seletivo da república {}</h2>
+            <h2 className='titulo-forms'>Bem vindo ao processo seletivo da república {republicaNome}</h2>
             <form onSubmit={handleSubmit(submit)} noValidate>
                 <h2>Informações Pessoais</h2>
                 <div className='perguntas-forms'>

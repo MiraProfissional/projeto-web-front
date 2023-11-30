@@ -12,8 +12,6 @@ export default function ListaInscricoes(){
     const [resposta, setResposta] = useState(null);
     const [respostaUser, setRespostaUser] = useState(null);
 
-    const form = useForm();
-    const { register, handleSubmit } = form;
 
     const config = {
         headers:{
@@ -22,7 +20,7 @@ export default function ListaInscricoes(){
     }
 
     useEffect(() => {
-        async function fetchData() {
+        async function valida() {
             try {
                 const respostaUser = await axios.get('http://localhost:3000/mi', config);
 
@@ -38,12 +36,10 @@ export default function ListaInscricoes(){
                 if (respostaUser.status === 200) {
                     try {
                         const resposta = await axios.get(`http://localhost:3000/inscricoes/${respostaUser.data["inscricoes"]}`, config);
-    
+                            setResposta(resposta)
                         // Verifica se a resposta da segunda chamada foi bem-sucedida
                         if (resposta.status === 200) {
                             setValidado(true);
-                        } else {
-                            setValidado(false);
                         }
                     } catch (error) {
                         setValidado(false);
@@ -54,7 +50,7 @@ export default function ListaInscricoes(){
             }
         }
     
-        fetchData();
+        valida();
     }, []);
 
 
