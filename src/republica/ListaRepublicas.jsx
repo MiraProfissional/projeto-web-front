@@ -69,6 +69,7 @@ export default function ListaRepublicas(){
                     <button>Buscar</button>
                     </form>
                 </section>
+                <p className="titulo">Repúblicas</p>
                 <section className="lista-republicas">
                     <BuscaRepublica formData={formData} config={config}/>
                 </section>

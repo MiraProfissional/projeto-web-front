@@ -38,16 +38,14 @@ export default function Navbar () {
     }
 
     return (
-        <>
-            <section className='teste'>
-                <h3 className='bv'>Bem vindo, {resposta.data["username"]}</h3>
-                <Link className="btn btn-home" to={`/republicas`}>Home</Link>
-                <Link className="btn-inscricoes " to={`/inscricoes`}>Minhas inscrições</Link>
-                <section className='container'>
+            <header className='header'>
+                <span>Bem vindo, {resposta.data["username"]}</span>
+                <nav>
+                    <Link className="btn btn-home" to={`/republicas`}>Home</Link>
+                    <Link className="btn-inscricoes " to={`/inscricoes`}>Minhas inscrições</Link>
                     <Link className="btn btn-configuracoes" to={`/configuracoes`}>Configurações</Link>
-                </section>
-            </section>
-        </>
+                </nav>
+            </header>
       );
 
 }

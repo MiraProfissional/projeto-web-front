@@ -1,76 +1,94 @@
-import { useEffect, useState, useRef } from "react";
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
-import Inscricao from "./Inscricao"
+import Inscricao from "./Inscricao";
+
 import '../styles/ListaInscricoes.css';
 
-export default function ListaInscricoes(){
+export default function ListaInscricoes() {
+  const [validado, setValidado] = useState(false);
+  const [respostaUser, setRespostaUser] = useState(null);
+  const [formData, setFormData] = useState({
+    id: '',
+    inscricoes: []
+  });
 
-    const [validado, setValidado] = useState(false);
-    const [resposta, setResposta] = useState(null);
-    const [respostaUser, setRespostaUser] = useState(null);
+  const form = useForm();
+  const { handleSubmit } = form;
 
+  const config = {
+    headers: {
+      'Authorization': 'Bearer '.concat(sessionStorage.getItem('token'))
+    }
+  };
 
-    const config = {
-        headers:{
-            'Authorization' : 'Bearer '.concat(sessionStorage.getItem('token'))
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const respostaUser = await axios.get('http://localhost:3000/mi', config);
+
+        if (respostaUser.status === 200) {
+          console.log('Resposta do endpoint /mi:', respostaUser.data);
+          setRespostaUser(respostaUser.data);
+          setFormData((prevData) => ({
+            ...prevData,
+            inscricoes: respostaUser.data.inscricoes || []
+          }));
+          setValidado(true);
+        } else {
+          setValidado(false);
         }
+      } catch (error) {
+        console.error('Erro na chamada /mi:', error);
+        setValidado(false);
+      }
     }
 
-    useEffect(() => {
-        async function valida() {
-            try {
-                const respostaUser = await axios.get('http://localhost:3000/mi', config);
-                // Verifica se a resposta foi bem-sucedida
-                if (respostaUser.status === 200) {
-                    setRespostaUser(respostaUser.data); // Ajusta para armazenar a propriedade 'data' da resposta
-                    setValidado(true);
-                } else {
-                    setValidado(false);
-                }
-    
-                // Chama a segunda função apenas se a primeira for bem-sucedida
-                if (respostaUser.status === 200) {
-                    try {
-                        
-                        const resposta = await axios.get(`http://localhost:3000/inscricoes/${respostaUser.data["inscricoes"]}`, config);
-                        
-                        // Verifica se a resposta da segunda chamada foi bem-sucedida
-                        if (resposta.status === 200) {
-                            setValidado(true);
-                            setResposta(resposta)
-                        } else {
-                            setResposta('Você não possui inscrições')
-                        }
-                    } catch (error) {
-                        setValidado(false);
-                    }
-                }
-            } catch (error) {
-                setValidado(false);
-            }
-        }
-    
-        valida();
-    }, []);
+    fetchData();
+  }, []);
 
+  const handleInscricaoDelete = async (inscricaoId) => {
+    try {
+      // Faz a chamada DELETE para excluir a inscrição
+      await axios.delete(`http://localhost:3000/inscricoes/delete/${inscricaoId}`, config);
 
-    if(!validado){
-        return <p>Token Inválido</p>
+      // Atualiza o estado ou realiza qualquer outra ação necessária após a exclusão
+      console.log(`Inscrição ${inscricaoId} excluída com sucesso`);
+
+      // Recarrega as inscrições após a exclusão (opcional)
+      fetchData();
+    } catch (error) {
+      console.error('Erro ao excluir inscrição:', error);
     }
+  };
 
-    return(
-        <>  
-            <Navbar/>
-            <section className="pag-minhas-inscricoes">
-                <h1>Minhas Inscrições</h1>
-                <h2>Liste suas inscrições</h2>
-                
-                <button>Listar</button>
-            </section>
-        </>   
-    )
+  if (!validado) {
+    return <p>Token Inválido</p>
+  }
+
+  const onSubmit = (data) => {
+    setFormData({ id: data.id });
+  };
+
+  return (
+    <>
+      <Navbar />
+      <section className="pag-minhas-inscricoes">
+        <h1>Minhas Inscrições</h1>
+        <h2>Liste suas inscrições</h2>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <input type="text" {...form.register("id")} placeholder="Insira o ID" />
+          <button type="submit">Listar</button>
+        </form>
+        {formData.inscricoes.map((inscricao) => (
+          <Inscricao
+            key={inscricao.id}
+            inscricao={inscricao}
+            onDelete={handleInscricaoDelete}
+          />
+        ))}
+      </section>
+    </>
+  );
 }
-

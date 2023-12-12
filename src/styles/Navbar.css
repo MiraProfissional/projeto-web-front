@@ -1,28 +1,27 @@
-.container{
-    width: 90%;
-    text-align: end;
-    margin: auto;
-    margin-right: 30px;
-}
-
-.bv{
-    text-align:start;
-    font-size: 1.5rem;
-    margin: 0;
-    width: 20%;
-}
-
-.btn-home{
-    width: 10%;
-}
-
-.teste{
-    display: flex;
-    flex-direction: row;
+.header{
     width: 100%;
+    height: 50px;
+    background-color: var(--primary);
+    color: var(--white);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.btn{
-    margin-top: 10px;
+.header span{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-left: 1rem;
+}
+
+.header a{
     text-decoration: none;
+    color: var(--white);
+    padding-right: 1.5rem;
+    font-size: 1.125rem;
+}
+
+.header a:hover{
+    color: var(--terceary);
 }

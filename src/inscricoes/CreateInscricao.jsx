@@ -113,55 +113,41 @@ export default function CreateInscricao({republica}){
                         <label htmlFor="nome" placeholder="nome">Nome</label>
                         <input className='tam1' type="text" id="nome" {...register('nome')} />
                         <p className='erro'>{errors.nome?.message}</p>
-                    </section>
-
-                    <section>
+                    
                         <label htmlFor="idade" placeholder="idade">Idade</label>
                         <input className='tam1' type="number" id="idade" {...register('idade')} />
                         <p className='erro'>{errors.idade?.message}</p>
-                    </section>
-
-                    <section>
+                    
                         <label htmlFor="cidade">Cidade</label>
                         <input className='tam1' type="cidade" id="cidade" {...register('cidade')} />
                         <p className='erro'>{errors.cidade?.message}</p>  
-                    </section>
-
-                    <section>
+                    
                         <label htmlFor="curso">Curso</label>
                         <input className='tam1' type="text" id="curso" {...register('curso')} />
                         <p className='erro'>{errors.curso?.message}</p> 
-                    </section>
-
-                    <section>
+                    
                         <label htmlFor="redeSocial" placeholder="nome">Rede Social</label>
                         <input className='tam1' type="text" id="redeSocial" {...register('redeSocial')} />
                         <p className='erro'>{errors.redeSocial?.message}</p>
-                    </section>
-
-                    <section>
+                    
                         <label htmlFor="celular" placeholder="celular">Celular</label>
                         <input className='tam1' type="text" id="celular" {...register('celular')} />
                         <p className='erro'>{errors.celular?.message}</p>
-                    </section>
+                    
 
-                    <section className='sub-titulo'>
-                        <h3>Informações adicionais</h3>
-                    </section>
+                        <section className='sub-titulo'>
+                            <h3>Informações adicionais</h3>
+                        </section>
 
-                    <section>   
+                      
                         <label htmlFor="sobre">Sobre</label>
                         <input className='tam2' type="textarea" id="sobre" {...register('sobre')} />
                         <p className='erro'>{errors.sobre?.message}</p>  
-                    </section>   
-
-                    <section>
+                  
                         <label htmlFor="curiosidade">Curiosidade</label>
                         <input className='tam2' type="textarea" id="curiosidade" {...register('curiosidade')} />
                         <p className='erro'>{errors.curiosidade?.message}</p>
-                    </section>
-
-                    <section>
+                    
                         <label htmlFor="motivoEscolha">Motivo por ter escolhido nossa república</label>
                         <input className='tam2' type="textarea" id="motivoEscolha" {...register('motivoEscolha')} />
                         <p className='erro'>{errors.motivoEscolha?.message}</p>

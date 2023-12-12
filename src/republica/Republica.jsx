@@ -7,21 +7,16 @@ export default function Republica({republica}){
 
     return (
         <>
-            <div className='card-rep'>
-                <section className='teste1'>
-                    <figure>
-                        <img src={`src/assets/${caminhoImagem}.png`} alt="" />
-                        <figcaption>{republica.nome} {republica.anoDeCriacao}</figcaption>
-                    </figure>
-                </section>
+            <section className='card'>
+                        <img className="logo"src={`src/assets/${caminhoImagem}.png`} alt="" />
                 <ul className='card-rep-caracteristicas'>
-                    <li>Gênero: {republica.genero}</li>
-                    <li>Endereço: {republica.rua}, {republica.numero}</li>
-                    <li>Moradores: {republica.qtdMembros}</li>
-                    <li>Vagas: {republica.vagasDisponiveis}</li>
-                    <button className='btn btn-rep'><Link to={`/republica/${republica.nome}`}>Acessar página</Link></button>
+                    <li><span className='sub-titulo'>Gênero:</span> {republica.genero}</li>
+                    <li><span className='sub-titulo'>Endereço:</span> {republica.rua}, {republica.numero}</li>
+                    <li><span className='sub-titulo'>Moradores:</span> {republica.qtdMembros}</li>
+                    <li><span className='sub-titulo'>Vagas:</span> {republica.vagasDisponiveis}</li>
+                    <button className='btn'><Link to={`/republica/${republica.nome}`}>Acessar página</Link></button>
                 </ul>
-            </div>
+            </section>
         </>
     )
 }

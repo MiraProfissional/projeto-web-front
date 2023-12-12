@@ -42,38 +42,33 @@ export default function CreateUser(){
         
     }
 
-    return (
+    return(
         <>
-            <h2>Crie uma nova conta</h2>
-            <form onSubmit={handleSubmit(submit)} noValidate>
-                <label htmlFor="username" placeholder="usuário">Usuário</label>
-                <input type="text" id="username" {...register('username')} />
-                <p className='erro'>{errors.username?.message}</p>
+            <section className="container">
+                <p className="titulo">Cadastro</p>
+                <div className="box">
+                    <form className="forms" onSubmit={handleSubmit(submit)} noValidate>
+                        <label htmlFor="username" placeholder="usuário">Usuário</label>
+                        <input type='text' id='username' {...register('username')}/>
+                        <p className="erro">{errors.username?.message}</p>
 
-                <label htmlFor="email" placeholder="email">Email</label>
-                <input type="text" id="email" {...register('email')} />
-                <p className='erro'>{errors.email?.message}</p>
+                        <label htmlFor="email" placeholder="email">Email</label>
+                        <input type='text' id='email' {...register('email')}/>
+                        <p className="erro">{errors.email?.message}</p>
 
-                <label htmlFor="password">Senha</label>
-                <input type="password" id="password" {...register('password')} />
-                <p className='erro'>{errors.password?.message}</p>     
+                        <label htmlFor="password" placeholder="email">Senha</label>
+                        <input type='password' id='password' {...register('password')}/>
+                        <p className="erro">{errors.password?.message}</p>
 
-                <label htmlFor="passwordConf">Confirmar Senha</label>
-                <input type="password" id="passwordConf" {...register('passwordConf')} />
-                <p className='erro'>{errors.passwordConf?.message}</p>     
+                        <label htmlFor="passwordConf" placeholder="senha1">Confirme a senha</label>
+                        <input type='password' id='passwordConf' {...register('passwordConf')}/>
+                        <p className="erro">{errors.passwordConf?.message}</p>
 
-                <p className='server-response'>{msg} <Link to="/"
-                style={{visibility : userCriado ? 'visible' : 'hidden' }}
-                >Fazer Login</Link></p>
-
-                <button>Criar Usuário</button>
-            </form>
-
-            <p className='server-response'>{msg}</p>
-            <Link to="/"
-            style={{visibility : userCriado ? 'visible' : 'hidden' }}
-            >Fazer Login</Link>
-            
+                        <button className="btn">Criar Usuário</button>
+                    </form>
+                </div>
+                <p className='server-response'>{msg}<Link to='/login' style={{visibility : userCriado ? 'visible' : 'hidden'}}>Fazer Login</Link></p>
+            </section>
         </>
     )
 

@@ -1,14 +1,6 @@
-.navbar {
-    height: 50px;
-    border-bottom: 1px solid black ;
-    background-color: #e9e3e3;
-    display: flex;
-    justify-content: space-between;
-}
-
 .filtros-home {
-    background-color: bisque;
-    margin: 10px;
+    background-color: var(--secondary);
+    margin-bottom: 4rem;
 }
 
 .form-pesquisa {
@@ -19,10 +11,21 @@
 
 .lista-republicas {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .card-rep {
     margin: 10px;
+}
+
+.titulo{
+    width: 100%;
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--secondary);
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 5px var(--terceary);
+    align-self: center;
 }

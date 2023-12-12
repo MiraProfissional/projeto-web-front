@@ -1,47 +1,66 @@
-#pag-login {
-    max-height: 100%;
+.container{
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-}
-
-.form-login {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin: 0 auto;
+    text-align: center;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    
-    border-radius: 20px;
-    box-shadow: 0px 0px 20px black;
-    font-size: 1.2em;
-    padding: 30px 0px;
 }
 
-
-button {
-    background-color: rgb(61, 58, 235);
-    border: 2px solid black;
-}
-
-button:hover {
-    background-color: rgb(0, 255, 55);
-}
-
-.realizar-cadastro {
-    font-size: 1.3em;
+.titulo{
+    font-size: 4rem;
     font-weight: bold;
+    text-align: center;
+    color: var(--secondary);
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 5px var(--terceary);
 }
 
-.link-cadastro {
-    font-size: 1.4em;
-    text-decoration: none;
-    color: rgb(61, 58, 235);
+.container label{
+    font-size: 1.125rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px var(--terceary);
+    margin: 0.5rem;
 }
 
-.link-cadastro:hover {
-    color: rgb(0, 255, 55);
+.box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 30%;
+    box-shadow: 0px 0px 10px var(--secondary);
+    border-radius: 20px;
+}
+
+.box input{
+    height: 30px;
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid var(--secondary);
+}
+
+.btn{
+    height: 40px;
+    font-size: 1.125rem;
+    font-weight: bold;
+    border: 0;
+    border-radius: 8px;
+    background-color: var(--gray);
+    color: var(--white);
+}
+
+.btn:hover{
+    color: var(--terceary);
+}
+
+.erro{
+    color: var(--red);
+}
+
+.botoes{
+    display: flex;
+    justify-content: space-around;
+    
 }

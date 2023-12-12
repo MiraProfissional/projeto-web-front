@@ -44,29 +44,27 @@ export default function Login(){
         return <Navigate to='/republicas' />
     }
 
-    return (
-        <>  
-        <section id='pag-login'>
-            <h2>Bem vindo ao [Nome da plataforma]!!</h2>
-            
-            <form className='form-login' onSubmit={handleSubmit(submit)} noValidate>
+    return(
+        <>
+            <section className="container">
+                <p className="titulo">Login</p>
+                <div className="box">
+                    <form className="forms" onSubmit={handleSubmit(submit)}>
+                        <label htmlFor="email" placeholder="email">Email</label>
+                        <input type="text" id="email" {...register('email')} />
+                        <p className="erro">{errors.email?.message}</p>
 
-                <label htmlFor="email" placeholder="email">Email</label>
-                <input type="text" id="email" {...register('email')} />
-                <p className='erro'>{errors.email?.message}</p>
+                        <label htmlFor="password">Senha</label>
+                        <input type="password" id="password" {...register('password')} />
+                        <p className="erro">{errors.password?.message}</p>
 
-                <label htmlFor="password">Senha</label>
-                <input type="password" id="password" {...register('password')} />
-                <p className='erro'>{errors.password?.message}</p>
-
-                <button>Entrar</button>
-            </form>
-            <p className="server-response">{msg}</p>
-            <div className="realizar-cadastro">
-                <p>Não possui conta? Faça seu cadastro!</p>
-                <p><Link className="link-cadastro" to="/criar-user">Cadastrar</Link></p>
-            </div>
-        </section>
+                        <section className="botoes">
+                            <button className="btn">Login</button>
+                            <button className="btn"><Link  className="btn" to="/criar-user">Cadastre-se</Link></button>
+                        </section>
+                    </form>
+                </div>
+            </section>
         </>
     )
 }

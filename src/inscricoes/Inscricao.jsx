@@ -1,25 +1,40 @@
 import '../styles/ListaInscricoes.css';
+import React from 'react';
+import axios from 'axios';
 
-export default function Inscricao({inscricao}){
+const Inscricao = ({ inscricao, onDelete }) => {
+  const handleDeleteClick = async () => {
+    try {
+      // Faça a chamada para excluir a inscrição usando o ID
+      await axios.delete(`http://localhost:3000/inscricoes/${inscricao.id}`);
+      
+      // Atualize o estado ou realize qualquer outra ação necessária após a exclusão
+      onDelete(inscricao.id);
+    } catch (error) {
+      console.error('Erro ao excluir inscrição:', error);
+    }
+  };
 
-    return (
-        <>
-            <ul className='inscricao'>
-                <h2>Id: {inscricao.id}</h2>
-                <li>Nome: {inscricao.nome}</li>
-                <li>Idade: {inscricao.idade}</li>
-                <li>Cidade: {inscricao.cidade}</li>
-                <li>Curso: {inscricao.curso}</li>
-                <li>Redesocial: {inscricao.redesocial}</li>
-                <li>Celular: {inscricao.celular}</li>
-                <li>Sobre: {inscricao.sobre}</li>
-                <li>Curiosidade: {inscricao.curiosidade}</li>
-                <li>Motivo da Escolha: {inscricao.motivosEcolha}</li>
-            </ul>
-            <section className='btns'>
-                <button className="btn">Exluir</button>
-                <button className="btn">Editar</button>
-            </section>
-        </>
-    )
-}
+  return (
+    <>
+      <ul className='inscricao'>
+        <h2>Id: {inscricao.id}</h2>
+        <li>Nome: {inscricao.nome}</li>
+        <li>Idade: {inscricao.idade}</li>
+        <li>Cidade: {inscricao.cidade}</li>
+        <li>Curso: {inscricao.curso}</li>
+        <li>Redesocial: {inscricao.redesocial}</li>
+        <li>Celular: {inscricao.celular}</li>
+        <li>Sobre: {inscricao.sobre}</li>
+        <li>Curiosidade: {inscricao.curiosidade}</li>
+        <li>Motivo da Escolha: {inscricao.motivosEcolha}</li>
+      </ul>
+      <section className='btns'>
+        <button className="btn" onClick={handleDeleteClick}>Excluir</button>
+        <button className="btn">Editar</button>
+      </section>
+    </>
+  );
+};
+
+export default Inscricao;
