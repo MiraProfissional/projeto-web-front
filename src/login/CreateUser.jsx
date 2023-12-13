@@ -64,7 +64,7 @@ export default function CreateUser(){
                         <input type='password' id='passwordConf' {...register('passwordConf')}/>
                         <p className="erro">{errors.passwordConf?.message}</p>
 
-                        <button className="btn">Criar Usuário</button>
+                        <button className="btn2">Criar Usuário</button>
                     </form>
                 </div>
                 <p className='server-response'>{msg}<Link to='/login' style={{visibility : userCriado ? 'visible' : 'hidden'}}>Fazer Login</Link></p>

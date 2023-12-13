@@ -26,7 +26,7 @@ input{
 }
 
 .erro{
-    color:red;
+    color: var(--red);
     font: 12px;
     text-align: left;
 }
@@ -62,4 +62,21 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.btn2{
+    width: 9rem;
+    height: 40px;
+    font-size: 1.125rem;
+    font-weight: bold;
+    border: 0;
+    border-radius: 8px;
+    background-color: var(--secondary);
+    text-decoration: none;
+    margin: 10px;
+    color: var(--white);
+}
+
+.btn2:hover{
+    color: var(--terceary);
 }

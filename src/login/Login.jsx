@@ -59,8 +59,8 @@ export default function Login(){
                         <p className="erro">{errors.password?.message}</p>
 
                         <section className="botoes">
-                            <button className="btn">Login</button>
-                            <button className="btn"><Link  className="btn" to="/criar-user">Cadastre-se</Link></button>
+                            <button className="btn1">Login</button>
+                            <button className="btn1"><Link  className="btn1" to="/criar-user">Cadastre-se</Link></button>
                         </section>
                     </form>
                 </div>

@@ -41,17 +41,21 @@
     border: 1px solid var(--secondary);
 }
 
-.btn{
+.btn1{
+    width: 9rem;
     height: 40px;
     font-size: 1.125rem;
     font-weight: bold;
     border: 0;
     border-radius: 8px;
-    background-color: var(--gray);
+    background-color: var(--secondary);
+    text-decoration: none;
+    margin: 10px;
     color: var(--white);
 }
 
-.btn:hover{
+
+.btn1:hover{
     color: var(--terceary);
 }
 
@@ -62,5 +66,4 @@
 .botoes{
     display: flex;
     justify-content: space-around;
-    
 }
