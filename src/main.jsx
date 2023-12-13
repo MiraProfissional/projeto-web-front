@@ -13,6 +13,9 @@ import PagRepublica from './republica/PagRepublica.jsx';
 import CreateInscricao from './inscricoes/CreateInscricao.jsx';
 import ListaInscricoes from './inscricoes/ListaInscricoes.jsx';
 import EditaConfig from './configuracoes/EditaConfig.jsx';
+import EditaPerfil from './edita_perfil/edita_perfil.jsx';
+import EditaEmail from './edita_email/edita_email.jsx';
+import EditaSenha from './edita_senha/edita_senha.jsx';
 
 //Adicionando as rotas
 const router = createBrowserRouter([
@@ -49,6 +52,18 @@ const router = createBrowserRouter([
   {
     path: 'configuracoes',
     element: <EditaConfig/>
+  },
+  {
+    path: 'edita_perfil',
+    element: <EditaPerfil/>
+  },
+  {
+    path: 'edita_email',
+    element: <EditaEmail/>
+  },
+  {
+    path: 'edita_senha',
+    element: <EditaSenha/>
   }
 ]);
 

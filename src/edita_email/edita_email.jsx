@@ -1,11 +1,11 @@
 import Navbar from "../navbar/Navbar";
-import '../styles/EditaConfig.css';
+import '../styles/edita_perfil.css';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-export default function EditaConfig(){
+export default function EditaEmail(){
 
     const [validado, setValidado] = useState(false);
     const [resposta, setResposta] = useState(null);
@@ -44,39 +44,24 @@ export default function EditaConfig(){
         <>  
         <Navbar/>
         <section className="container">
-                <p className="titulo">Configurações</p>
+                <p className="titulo">Edita Email</p>
                 <div className="box">
                     <section className="secoes">
                         <section className="secoes1">
-                            <p className="subtitulo">Usuário</p>
-                            <p>{resposta.data['username']}</p>
-                        </section>
-                        <section>
-                            <button className="btn4"><Link  className="btn4" to="/edita_perfil">Editar</Link></button>
-                        </section>
-                    </section>
-                    <hr/>
-                    <section className="secoes">
-                        <section className="secoes1">
-                            <p className="subtitulo">Email</p>
+                            <p className="subtitulo">Email Antigo</p>
                             <p>{resposta.data['email']}</p>
                         </section>
-                        <section>
-                            <button className="btn4"><Link  className="btn4" to="/edita_email">Editar</Link></button>
-                        </section>
                     </section>
                     <hr/>
                     <section className="secoes">
                         <section className="secoes1">
-                            <p className="subtitulo">Senha</p>
-                        </section>
-                        <section>
-                            <button className="btn4"><Link  className="btn4" to="/edita_senha">Editar</Link></button>
+                            <p className="subtitulo">Email Novo</p>
+                            <input className="input"/>
                         </section>
                     </section>
                 </div>
                 <section>
-                    <button className="btn3">Excluir</button>
+                    <button className="btn3">Editar</button>
                 </section>
             </section>
         </>  
