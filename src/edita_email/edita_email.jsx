@@ -3,6 +3,7 @@ import '../styles/edita_perfil.css';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 
 
 export default function EditaEmail(){
@@ -14,6 +15,31 @@ export default function EditaEmail(){
         headers:{
             'Authorization' : 'Bearer '.concat(sessionStorage.getItem('token'))
         }
+    }
+
+    const [msg, setMsg] = useState(' ');
+
+    const form = useForm();
+
+    const { register, handleSubmit, formState } = form;
+
+    const {errors} = formState;
+
+    const submit = async (data) => {
+
+        try {
+            const idUser = resposta.data["id"]
+            const response = await axios.post('http://localhost:3000/edita_email', {data, idUser});
+
+            //Extrair o token
+            const token = response.data.token;
+            sessionStorage.setItem('token', token);
+            if(token) 
+                setMsg('Autenticado');
+        } catch (error) {
+            setMsg(error.response.data);
+        }   
+        
     }
 
     useEffect(() => {
@@ -56,7 +82,7 @@ export default function EditaEmail(){
                     <section className="secoes">
                         <section className="secoes1">
                             <p className="subtitulo">Email Novo</p>
-                            <input className="input"/>
+                            <input type="text" id="email" {...register('username')} className="input"/>
                         </section>
                     </section>
                 </div>

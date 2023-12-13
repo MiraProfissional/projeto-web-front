@@ -15,9 +15,13 @@ const Inscricao = ({ inscricao, onDelete }) => {
     }
   };
 
+  let caminhoImagem = republica.logo;
+
   return (
     <>
-      <ul className='inscricao'>
+      <section className='inscricao'>
+        <img className="logo"src={`src/assets/${caminhoImagem}.png`} alt="" />
+        <p className='titulo1'>{inscricao.nome}</p>
         <h2>Id: {inscricao.id}</h2>
         <li>Nome: {inscricao.nome}</li>
         <li>Idade: {inscricao.idade}</li>
@@ -28,7 +32,7 @@ const Inscricao = ({ inscricao, onDelete }) => {
         <li>Sobre: {inscricao.sobre}</li>
         <li>Curiosidade: {inscricao.curiosidade}</li>
         <li>Motivo da Escolha: {inscricao.motivosEcolha}</li>
-      </ul>
+      </section>
       <section className='btns'>
         <button className="btn" onClick={handleDeleteClick}>Excluir</button>
         <button className="btn">Editar</button>

@@ -54,20 +54,7 @@ export default function ListaRepublicas(){
             <section id='pag-republicas'>
                 <Navbar/>
                 <section className="filtros-home">
-                    <form className="form-pesquisa" onSubmit={handleSubmit(submit)} noValidate>
 
-                        <label htmlFor="nomeRepublica" placeholder="nomeRepublica">Insira o nome da república que deseja buscar</label>
-                        <input type="text" id="nomeRepublica" {...register('nomeRepublica')} />
-
-                        <label htmlFor="selecao">Escolha o gênero:</label>
-                        <select id="selecao" value={selecao} onChange={handleChange}>
-                            <option value="">Selecione uma opção</option>
-                            <option value="masculino">Masculina</option>
-                            <option value="feminina">Feminina</option>
-                            <option value="mista">Mista</option>
-                        </select>
-                    <button>Buscar</button>
-                    </form>
                 </section>
                 <p className="titulo">Repúblicas</p>
                 <section className="lista-republicas">

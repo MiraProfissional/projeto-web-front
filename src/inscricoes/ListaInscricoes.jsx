@@ -74,13 +74,8 @@ export default function ListaInscricoes() {
   return (
     <>
       <Navbar />
-      <section className="pag-minhas-inscricoes">
-        <h1>Minhas Inscrições</h1>
-        <h2>Liste suas inscrições</h2>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <input type="text" {...form.register("id")} placeholder="Insira o ID" />
-          <button type="submit">Listar</button>
-        </form>
+      <section className="container">
+        <p className="titulo">Minhas Inscrições</p>
         {formData.inscricoes.map((inscricao) => (
           <Inscricao
             key={inscricao.id}
