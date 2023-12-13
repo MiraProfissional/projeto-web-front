@@ -1,6 +1,6 @@
 import Navbar from "../navbar/Navbar";
 import '../styles/EditaConfig.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -76,7 +76,7 @@ export default function EditaConfig(){
                     </section>
                 </div>
                 <section>
-                    <button className="btn3">Excluir</button>
+                    <button className="btn3"><Link  className="btn4" to="/republicas">Voltar</Link></button>
                 </section>
             </section>
         </>  
