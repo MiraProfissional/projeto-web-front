@@ -62,6 +62,7 @@ export default function ListaInscricoes() {
     } 
     catch (error) {
     }
+  }
 
   if (!validado) {
     return <p>Token Inválido</p>
