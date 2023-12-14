@@ -65,17 +65,17 @@ export default function EditaEmail(){
             const response = await axios.post('http://localhost:3000/edita_email', {...data, idUser});
             setMsg(response.data);
 
+            if(response.status === 409) {
+                setEmailAlterado(true);
+            }
             if(response.data.includes("sucesso")) {
                 setEmailAlterado(true);
             }
-            
         } catch (error) {
             setMsg(error.response.data);
         }   
         
     }
-
-    
 
     return(
         <>  
