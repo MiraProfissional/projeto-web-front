@@ -36,6 +36,7 @@ export default function EditaEmail(){
     const { register, handleSubmit, formState } = form;
 
     const {errors} = formState;
+
     useEffect(() => {
         async function valida(){
             try{
@@ -83,7 +84,7 @@ export default function EditaEmail(){
         <>  
         <Navbar/>
         <section className="container">
-                <p className="titulo">Usuário</p>
+                <p className="titulo">Editar email</p>
                 <p className='server-response' style={{visibility : emailAlterado ? 'visible' : 'hidden'}}>{msg}</p>
                 <div className="box">
                     <section className="secoes">
