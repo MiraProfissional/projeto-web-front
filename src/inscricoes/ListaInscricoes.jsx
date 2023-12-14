@@ -9,7 +9,7 @@ import '../styles/ListaInscricoes.css';
 export default function ListaInscricoes() {
   
   const [msg, setMsg] = useState(' ');
-  const [validado, setValidado] = useState(false);
+  const [validado, setValidado] = useState(true);
   const [respostaUser, setRespostaUser] = useState(null);
   const [inscricoesUser, setInscricoesUser] = useState(null);
   const [idInscricao, setIdInscricao] = useState(null);
@@ -41,7 +41,7 @@ export default function ListaInscricoes() {
         }
       }
       catch(error){
-        setValidado(false);
+        setValidado(true);
       }
     }
     
@@ -74,7 +74,7 @@ export default function ListaInscricoes() {
       <section className="pag-minhas-inscricoes">
         <h1>Minhas Inscrições</h1>
         <p className='server-response' style={{visibility : inscricaoDeletada ? 'visible' : 'hidden'}}>{msg}</p>
-        {infoInscricoes((inscricao) => (
+        {infoInscricoes.map((inscricao) => (
           <Inscricao
             key={inscricao.id}
             inscricao={inscricao}

@@ -2,7 +2,7 @@ import '../styles/ListaInscricoes.css';
 import React from 'react';
 import axios from 'axios';
 
-const Inscricao = ({inscricao, onDelete}) => {
+const Inscricao5 = ({inscricao, onDelete}) => {
   const handleClick = async () => {
     try {
       onDelete(inscricao.id);
