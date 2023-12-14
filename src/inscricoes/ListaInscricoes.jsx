@@ -7,15 +7,16 @@ import Inscricao from "./Inscricao";
 import '../styles/ListaInscricoes.css';
 
 export default function ListaInscricoes() {
+  
+  const [msg, setMsg] = useState(' ');
   const [validado, setValidado] = useState(false);
   const [respostaUser, setRespostaUser] = useState(null);
-  const [formData, setFormData] = useState({
-    id: '',
-    inscricoes: []
-  });
+  const [inscricoesUser, setInscricoesUser] = useState(null);
+  const [idInscricao, setIdInscricao] = useState(null);
+  const [inscricaoDeletada, setInscricaoDeletada] = useState(false);
+  const [infoInscricoes, setInfoInscricoes] = useState(null);
 
   const form = useForm();
-  const { handleSubmit } = form;
 
   const config = {
     headers: {
@@ -24,63 +25,59 @@ export default function ListaInscricoes() {
   };
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const respostaUser = await axios.get('http://localhost:3000/mi', config);
+    async function valida(){
+      try{
+        const resposta = await axios.get(`http://localhost:3000/mi`, config);
 
-        if (respostaUser.status === 200) {
-          console.log('Resposta do endpoint /mi:', respostaUser.data);
-          setRespostaUser(respostaUser.data);
-          setFormData((prevData) => ({
-            ...prevData,
-            inscricoes: respostaUser.data.inscricoes || []
-          }));
+        //Armazena o objeto da requisição na variável "resposta"
+        setResposta(resposta)
+        
+        if (resposta.status === 200) {
           setValidado(true);
-        } else {
-          setValidado(false);
+          setIdUser(resposta.data['id']);
+          setInscricoesUser(resposta.data['inscricoes']);
+          const retInfoInscricoes = await axios.get(`http://localhost:3000/inscricoes-usuario`, inscricoesUser);
+          setInfoInscricoes(retInfoInscricoes);
         }
-      } catch (error) {
-        console.error('Erro na chamada /mi:', error);
+      }
+      catch(error){
         setValidado(false);
       }
     }
-
-    fetchData();
+    
+    valida();
   }, []);
 
-  const handleInscricaoDelete = async (inscricaoId) => {
+  const submit = async (idInscricao) => {
     try {
-      // Faz a chamada DELETE para excluir a inscrição
-      await axios.delete(`http://localhost:3000/inscricoes/delete/${inscricaoId}`, config);
+      const response = await axios.post('http://localhost:3000/excluir-inscricao',  {idUser, idInscricao});
+      setMsg(response.data);
 
-      // Atualiza o estado ou realiza qualquer outra ação necessária após a exclusão
-      console.log(`Inscrição ${inscricaoId} excluída com sucesso`);
-
-      // Recarrega as inscrições após a exclusão (opcional)
-      fetchData();
-    } catch (error) {
-      console.error('Erro ao excluir inscrição:', error);
+      if(response.status === 409) {
+        setInscricaoDeletada(true);
+      }
+      if(response.data.includes("sucesso")) {
+        setInscricaoDeletada(true);
+      }
+    } 
+    catch (error) {
     }
-  };
 
   if (!validado) {
     return <p>Token Inválido</p>
   }
 
-  const onSubmit = (data) => {
-    setFormData({ id: data.id });
-  };
-
   return (
     <>
       <Navbar />
-      <section className="container">
-        <p className="titulo">Minhas Inscrições</p>
-        {formData.inscricoes.map((inscricao) => (
+      <section className="pag-minhas-inscricoes">
+        <h1>Minhas Inscrições</h1>
+        <p className='server-response' style={{visibility : inscricaoDeletada ? 'visible' : 'hidden'}}>{msg}</p>
+        {infoInscricoes((inscricao) => (
           <Inscricao
             key={inscricao.id}
             inscricao={inscricao}
-            onDelete={handleInscricaoDelete}
+            onDelete={submit}
           />
         ))}
       </section>

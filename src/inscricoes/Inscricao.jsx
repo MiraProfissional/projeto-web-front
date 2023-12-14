@@ -2,27 +2,25 @@ import '../styles/ListaInscricoes.css';
 import React from 'react';
 import axios from 'axios';
 
-const Inscricao = ({ inscricao, onDelete }) => {
-  const handleDeleteClick = async () => {
+const Inscricao = ({inscricao, onDelete}) => {
+  const handleClick = async () => {
     try {
-      // Faça a chamada para excluir a inscrição usando o ID
-      await axios.delete(`http://localhost:3000/inscricoes/${inscricao.id}`);
-      
-      // Atualize o estado ou realize qualquer outra ação necessária após a exclusão
       onDelete(inscricao.id);
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Erro ao excluir inscrição:', error);
     }
-  };
+  }
+};
 
-  let caminhoImagem = republica.logo;
-
+export default function Inscricao(inscricao) {
   return (
     <>
+      <Navbar />
       <section className='inscricao'>
-        <img className="logo"src={`src/assets/${caminhoImagem}.png`} alt="" />
         <p className='titulo1'>{inscricao.nome}</p>
         <h2>Id: {inscricao.id}</h2>
+        <li>República: {inscricao.republica}</li>
         <li>Nome: {inscricao.nome}</li>
         <li>Idade: {inscricao.idade}</li>
         <li>Cidade: {inscricao.cidade}</li>
@@ -34,11 +32,12 @@ const Inscricao = ({ inscricao, onDelete }) => {
         <li>Motivo da Escolha: {inscricao.motivosEcolha}</li>
       </section>
       <section className='btns'>
-        <button className="btn" onClick={handleDeleteClick}>Excluir</button>
+        <button className="btn" onClick={handleClick}>Excluir</button>
         <button className="btn">Editar</button>
       </section>
     </>
   );
 };
 
-export default Inscricao;
+
+

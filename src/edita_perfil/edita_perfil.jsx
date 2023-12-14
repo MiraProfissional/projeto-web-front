@@ -17,7 +17,7 @@ export default function EditaPerfil(){
     const [validado, setValidado] = useState(false);
     const [resposta, setResposta] = useState(null);
     const [idUser, setIdUser] = useState(null);
-    const [usernameAlterado, setUsernameAlterado] = useState(true);
+    const [usernameAlterado, setUsernameAlterado] = useState(false);
     const [formData, setFormData] = useState(null);
 
     const config = {
