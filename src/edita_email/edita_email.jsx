@@ -1,15 +1,24 @@
 import Navbar from "../navbar/Navbar";
-import '../styles/edita_perfil.css';
+import '../styles/edita_email.css';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
 
 
 export default function EditaEmail(){
 
+    const schema = yup.object({
+        email: yup.string().email('Email inválido').required("Email obrigatório"),
+        emailConf: yup.string().required('É necessário confirmar seu email').oneOf([yup.ref('email')], 'Os emails devem coincidir!'),
+    });
+
     const [validado, setValidado] = useState(false);
     const [resposta, setResposta] = useState(null);
+    const [idUser, setIdUser] = useState(null);
+    const [emailAlterado, setEmailAlterado] = useState(true);
 
     const config = {
         headers:{
@@ -17,31 +26,15 @@ export default function EditaEmail(){
         }
     }
 
-    const [msg, setMsg] = useState(' ');
+    const form = useForm({
+        resolver: yupResolver(schema)
+    });
 
-    const form = useForm();
+    const [msg, setMsg] = useState(' ');
 
     const { register, handleSubmit, formState } = form;
 
     const {errors} = formState;
-
-    const submit = async (data) => {
-
-        try {
-            const idUser = resposta.data["id"]
-            const response = await axios.post('http://localhost:3000/edita_email', {data, idUser});
-
-            //Extrair o token
-            const token = response.data.token;
-            sessionStorage.setItem('token', token);
-            if(token) 
-                setMsg('Autenticado');
-        } catch (error) {
-            setMsg(error.response.data);
-        }   
-        
-    }
-
     useEffect(() => {
         async function valida(){
             try{
@@ -52,6 +45,7 @@ export default function EditaEmail(){
                 
                 if (resposta.status === 200) {
                     setValidado(true);
+                    setIdUser(resposta.data['id']);
                 }
             }
             catch(error){
@@ -66,29 +60,53 @@ export default function EditaEmail(){
         return <p>Token Inválido</p>
     }
 
+    const submit = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:3000/edita_email', {...data, idUser});
+            setMsg(response.data);
+
+            if(response.data.includes("sucesso")) {
+                setEmailAlterado(true);
+            }
+            
+        } catch (error) {
+            setMsg(error.response.data);
+        }   
+        
+    }
+
+    
+
     return(
         <>  
         <Navbar/>
         <section className="container">
-                <p className="titulo">Edita Email</p>
+                <p className="titulo">Usuário</p>
+                <p className='server-response' style={{visibility : emailAlterado ? 'visible' : 'hidden'}}>{msg}</p>
                 <div className="box">
                     <section className="secoes">
                         <section className="secoes1">
-                            <p className="subtitulo">Email Antigo</p>
-                            <p>{resposta.data['email']}</p>
+                            <p className="subtitulo">Email atual</p>
+                            <p>{resposta.data["email"]}</p>
                         </section>
                     </section>
                     <hr/>
                     <section className="secoes">
                         <section className="secoes1">
-                            <p className="subtitulo">Email Novo</p>
-                            <input type="text" id="email" {...register('username')} className="input"/>
+                            <form onSubmit={handleSubmit(submit)} noValidate>
+                                <label className="label" htmlFor="email" placeholder="email">Novo Email</label>
+                                <input type="text" id="email" {...register('email')}/>
+                                <p className="erro">{errors.email?.message}</p>
+                                
+                                <label className="label" htmlFor="emailConf" placeholder="emailConf">Confirme o Email</label>
+                                <input type="text" id="emailConf" {...register('emailConf')}/>
+                                <p className="erro">{errors.emailConf?.message}</p>
+                                
+                                <button className="btn3">Editar</button>
+                            </form>
                         </section>
                     </section>
                 </div>
-                <section>
-                    <button className="btn3">Editar</button>
-                </section>
             </section>
         </>  
     )

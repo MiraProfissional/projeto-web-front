@@ -29,16 +29,17 @@
     justify-content: space-around;
     align-items: center;
 
-    width: 30%;
+    width: 40%;
     box-shadow: 0px 0px 10px var(--secondary);
     border-radius: 20px;
 }
 
 .box input{
     height: 30px;
-    width: 70%;
+    width: 140%;
     border-radius: 5px;
     border: 1px solid var(--secondary);
+    font-size: 90%;
 }
 
 .btn1{
@@ -50,7 +51,7 @@
     border-radius: 8px;
     background-color: var(--secondary);
     text-decoration: none;
-    margin: 10px;
+    margin: 3%;
     color: var(--white);
 }
 
