@@ -12,10 +12,10 @@ export default function CreateUser(){
     const [userCriado,setUserCriado] = useState(false);
 
     const schema = yup.object({
-        username: yup.string().required('O preenchimento do campo Usuário é obrigatório'),
-        email: yup.string().email('Email inválido').required('O preenchimento do campo Email é obrigatório'),
-        password: yup.string().min(2,'Senha com no mínimo 2 caracteres').required('O preenchimento do campo Senha é obrigatório'),
-        passwordConf: yup.string().required('É necessário confirmar sua senha').oneOf([yup.ref('password')], 'As senhas devem coincidir!'),
+        username: yup.string().required('Campo obrigatório'),
+        email: yup.string().email('Email inválido').required('Campo obrigatório'),
+        password: yup.string().min(2,'Mínimo 2 caracteres ').required(),
+        passwordConf: yup.string().min(2,'É necessário confirmar a senha').required().oneOf([yup.ref('password')], 'As senhas devem coincidir!')
     });
 
     const form = useForm({
@@ -60,14 +60,14 @@ export default function CreateUser(){
                         <input type='password' id='password' {...register('password')}/>
                         <p className="erro">{errors.password?.message}</p>
 
-                        <label htmlFor="passwordConf" placeholder="senha1">Confirme a senha</label>
+                        <label htmlFor="passwordConf" placeholder="passwordConf">Confirme a senha</label>
                         <input type='password' id='passwordConf' {...register('passwordConf')}/>
                         <p className="erro">{errors.passwordConf?.message}</p>
 
                         <button className="btn2">Criar Usuário</button>
                     </form>
                 </div>
-                <p className='server-response'>{msg}<Link to='/login' style={{visibility : userCriado ? 'visible' : 'hidden'}}>Fazer Login</Link></p>
+                <p className='server-response'>{msg}<Link to='/' style={{visibility : userCriado ? 'visible' : 'hidden'}}>Fazer Login</Link></p>
             </section>
         </>
     )

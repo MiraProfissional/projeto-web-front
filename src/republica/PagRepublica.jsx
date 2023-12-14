@@ -68,7 +68,7 @@ export default function PagRepublica(){
                 
                 </section>
                 <section className="botao">   
-                <button onClick={handleInscrever} style={{visibility : formAtivo ? 'hidden' : 'visible' }} className='btn btn-inscricao'>Inscrever-se</button>
+                    <button onClick={handleInscrever} style={{visibility : formAtivo ? 'hidden' : 'visible' }} className='btn'>Inscrever-se</button>
                 </section>
                 
             </section>

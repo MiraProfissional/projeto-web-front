@@ -8,10 +8,11 @@ import '../styles/PagRepublica.css';
 
 export default function CreateInscricao({republica}){
 
+    const [formData, setFormData] = useState(null);
     const [republicaId, setRepublicaId] = useState(republica);
     const [msg, setMsg] = useState();
     const [formAtivo,setFormAtivo] = useState(false);
-    const [validado, setValidado] = useState(false);
+    const [validado, setValidado] = useState(true);
     const [resposta, setResposta] = useState(null);
     const [respostaUser, setRespostaUser] = useState(null);
     const [republicaNome, setRepublicaNome] = useState(resposta && resposta.data["nome"]);
@@ -42,8 +43,9 @@ export default function CreateInscricao({republica}){
     const submit = async (data) => {
         
         try {
+            setFormData({...formData, ...data});
             //Envio dos dados do formulário + idRep + idUsername
-            const response = await axios.post('http://localhost:3000/create-inscricao', {...data,republicaId,username});
+            const response = await axios.post('http://localhost:3000/create-inscricao', {...data, republicaNome, username});
 
             setMsg(response.data);
             if(response.data.includes('sucesso'))
@@ -74,8 +76,6 @@ export default function CreateInscricao({republica}){
                 
                     try{
                         const resposta = await axios.get(`http://localhost:3000/republicaId/${republicaId}`,config);
-                        console.log('Aqui')
-                        console.log(resposta)
                         //Armazena o objeto da requisição na variável "resposta"
                         setResposta(resposta)
                         setRepublicaNome(resposta.data["nome"])
@@ -84,11 +84,11 @@ export default function CreateInscricao({republica}){
                             setValidado(true);
                         }
                     }catch(error){
-                        setValidado(false);
+                        setValidado(true);
                     }
                 }
             } catch (error) {
-                setValidado(false);
+                setValidado(true);
             }
         }
     
@@ -153,7 +153,7 @@ export default function CreateInscricao({republica}){
                         <p className='erro'>{errors.motivoEscolha?.message}</p>
                     </section>
                 </div>
-                <button onClick={handleInscrever} >Enviar inscrição</button>
+                <button onClick={handleInscrever} className='btn'>Enviar inscrição</button>
             </form>
             
             <section>

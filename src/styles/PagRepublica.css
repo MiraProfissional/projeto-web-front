@@ -2,9 +2,13 @@ figure{
     text-align: center;
 }
 
-.botao{
+.btn{
     text-align: center;
-    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+    min-height:35px;
+    min-width: 20%;
+    align-items: center;
 }
 
 .logo-rep{
@@ -65,5 +69,9 @@ figure{
 
 .sub-titulo{
     width: 1000px;
+    text-align: center;
+}
+
+.botao {
     text-align: center;
 }
