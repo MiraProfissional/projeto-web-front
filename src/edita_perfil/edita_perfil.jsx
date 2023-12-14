@@ -7,15 +7,16 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import { set, useForm } from 'react-hook-form';
 
 export default function EditaPerfil(){
+    
+    const schema = yup.object( {
+        username: yup.string().required('Campo obrigatório'),
+    });
 
     const [msg, setMsg] = useState(' ');
     const [resposta, setResposta] = useState(null);
     const [validado, setValidado] = useState(false);
     const [idUser, setIdUser] = useState(null);
 
-    const schema = yup.object( {
-        username: yup.string().required('Campo obrigatório')
-    });
 
     const form = useForm({
         resolver: yupResolver(schema)

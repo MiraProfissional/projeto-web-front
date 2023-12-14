@@ -19,6 +19,7 @@ export default function EditaEmail(){
     const [resposta, setResposta] = useState(null);
     const [idUser, setIdUser] = useState(null);
     const [emailAlterado, setEmailAlterado] = useState(true);
+    const [formData, setFormData] = useState(null);
 
     const config = {
         headers:{
@@ -62,6 +63,7 @@ export default function EditaEmail(){
 
     const submit = async (data) => {
         try {
+            setFormData({...formData, ...data});
             const response = await axios.post('http://localhost:3000/edita_email', {...data, idUser});
             setMsg(response.data);
 
